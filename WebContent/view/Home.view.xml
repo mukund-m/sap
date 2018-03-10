@@ -1,0 +1,31 @@
+<mvc:View
+	controllerName="sap.ui.demo.toolpageapp.controller.Home"
+	xmlns="sap.m"
+	xmlns:l="sap.ui.layout"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc">
+	<Page showHeader="false" title="Your Tasks">
+	
+	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Request a new change"
+		subheader="Subtitle" press="newRequest">
+		<TileContent >
+			<ImageContent src="sap-icon://home-share" />
+		</TileContent>
+	</GenericTile>
+	
+	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="Change Work list"
+		subheader="Subtitle" press="workList">
+		<TileContent unit="EUR" footer="Current Quarter">
+			<ImageContent src="sap-icon://home-share" />
+		</TileContent>
+	</GenericTile>
+	
+	<GenericTile class="sapUiTinyMarginBegin sapUiTinyMarginTop tileLayout" header="My Tasks"
+		subheader="Subtitle" press="myTasks">
+		<TileContent >
+			<NumericContent value="5/5" />
+		</TileContent>
+	</GenericTile>
+</Page>
+	
+</mvc:View>

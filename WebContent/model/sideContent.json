@@ -1,0 +1,34 @@
+{
+	"navigation": [
+	{
+			"title": "Login",
+			"icon": "sap-icon://home",
+			"expanded": true,
+			"key": "home",
+			"items": []
+		},
+		{
+			"title": "Home",
+			"icon": "sap-icon://home",
+			"expanded": true,
+			"key": "home",
+			"items": []
+		},
+		{
+			"title": "My Tasks",
+			"icon": "sap-icon://settings",
+			"expanded": false,
+			"key": "home"
+		,
+			"items": []
+		},
+		{
+			"title": "My Requests",
+			"icon": "sap-icon://settings",
+			"expanded": false,
+			"key": "home"
+		,
+			"items": []
+		}
+			]
+}

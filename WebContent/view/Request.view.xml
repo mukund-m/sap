@@ -1,0 +1,304 @@
+<mvc:View controllerName="sap.ui.demo.toolpageapp.controller.Request"
+	xmlns="sap.uxap" xmlns:f="sap.ui.layout.form" xmlns:m="sap.m"
+	xmlns:table="sap.ui.table"
+	xmlns:html="http://www.w3.org/1999/xhtml"
+	xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc">
+	<m:Page showHeader="false" title="Your Tasks">
+
+		<ObjectPageLayout enableLazyLoading="true"
+			useIconTabBar="true" id="objectPageLayout">
+			<headerTitle>
+				<ObjectPageHeader>
+
+				</ObjectPageHeader>
+			</headerTitle>
+			<headerContent>
+				<f:SimpleForm title="Create a new request" columnsL="2"
+					columnsM="2" editable="true" layout="ResponsiveGridLayout">
+					<f:content>
+						<core:Title text="Header" />
+						<m:Label labelFor="requestTitle" text="Title" />
+						<m:Input value="{requestHeader>/title}" valueLiveUpdate="true" id="requestTitle" type="Text" width="40%"   />
+						
+						<m:Label labelFor="requestType" text="Type" />
+
+						<m:ComboBox width="30%" selectionChange="typeChanged"
+							items="{
+													path: '/requestTypes',
+													sorter: { path: 'text' }
+												}">
+							<m:items>
+								<core:Item key="{key}" text="{text}" />
+							</m:items>
+						</m:ComboBox>
+						
+						<m:Label text="Start Date" labelFor="startDate" />
+						<m:DatePicker id="startDate" change="handleStartDateChange"
+							width="20%" class="sapUiSmallMarginBottom" />
+						<m:Label text="Duration" labelFor="duration" />
+						<m:RadioButtonGroup id="duration" columns="3" select="durationSelected"
+							width="50%" class="sapUiMediumMarginBottom">
+							<m:buttons>
+								<m:RadioButton id="Temp" text="Temorary" selected="true" />
+								<m:RadioButton id="Perm" text="permanent" />
+							</m:buttons>
+						</m:RadioButtonGroup>
+					</f:content>
+				</f:SimpleForm>
+
+			</headerContent>
+			<sections>
+				<ObjectPageSection id="goals" title="Definition">
+					<subSections>
+						<ObjectPageSubSection id="goalsSS1" title="">
+							<blocks>
+							
+								<!-- <f:SimpleForm
+									columnsL="2"
+									columnsM="2"
+									editable="true"
+									id="definition"
+									layout="ResponsiveGridLayout">
+									
+									<f:content id="def1">
+										
+										<m:Label
+												labelFor="phoneNumberInput"
+												text="Change Description *:"/>
+											<m:TextArea placeholder="Please provide a detailed description of change" rows="6" >
+											</m:TextArea>
+											
+											<m:Label
+												labelFor="phoneNumberInput"
+												text="Reason of Change *"/>
+											<m:TextArea placeholder="Please provide the retionale behind the change" rows="7" >
+											</m:TextArea>
+										<core:Title text="{i18n>ownerContact}" />
+											<m:Label
+												labelFor="phoneNumberInput"
+												text="{i18n>ownerMobile}"/>
+											<m:Input
+												id="phoneNumberInput"
+												type="Tel"
+												width="100%"
+												value="+1 234 / 56789"/>
+											<m:Label
+												labelFor="faxNumberInput"
+												text="{i18n>ownerFax}"/>
+											<m:Input
+												id="faxNumberInput"
+												type="Tel"
+												width="100%"
+												value="+1 987 / 654321"/>
+											<m:Label
+												labelFor="emailInput"
+												text="{i18n>mail}"/>
+											<m:Input
+												id="emailInput"
+												type="Email"
+												width="100%"
+												value="john.doe@myshop.com"/>
+									</f:content>
+								</f:SimpleForm> -->
+								<sap.ui.layout.form:SimpleForm columnsL="2" emptySpanM="0" editable="true" columnsM="2" emptySpanL="0" emptySpanS="0" id="__form"  
+  labelMinWidth="192" labelSpanL="4" labelSpanM="4" labelSpanS="12" layout="ResponsiveGridLayout" minWidth="0" width="100%"  
+  xmlns:sap.ui.layout.form="sap.ui.layout.form">  
+  <sap.ui.layout.form:content>  
+ 
+   
+  </sap.ui.layout.form:content>  
+  <sap.ui.layout.form:title>  
+  <core:Title id="oTEduPre" text="Educación Pregrado"/>  
+  </sap.ui.layout.form:title>  
+  </sap.ui.layout.form:SimpleForm> 
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+				
+				<!-- ATTACHMENTS SECTION -->
+				<ObjectPageSection id="goals1" title="Attachments">
+					<subSections>
+						<ObjectPageSubSection id="goalsSS2" title="">
+							<blocks>
+								<m:UploadCollection
+				id="UploadCollection"
+				maximumFilenameLength="{fileUploadSettings>/maximumFilenameLength}"
+				maximumFileSize="{fileUploadSettings>/maximumFileSize}"
+				multiple="true"
+				change="onChange"
+				fileDeleted="onFileDeleted"
+				filenameLengthExceed="onFilenameLengthExceed"
+				fileRenamed="onFileRenamed"
+				fileSizeExceed="onFileSizeExceed"
+				fileType="{fileTypes>/selected}"
+				selectionChange="onSelectionChange"
+				typeMissmatch="onTypeMissmatch"
+				uploadComplete="onUploadComplete"
+				beforeUploadStarts="onBeforeUploadStarts"
+				uploadTerminated="onUploadTerminated"
+				items="{
+					path: '/attachments',
+					templateShareable: false
+				}"
+				numberOfAttachmentsText="Attachments (3)"
+				showSeparators="{fileUploadSettings>/showSeparators}"
+				uploadEnabled="{fileUploadSettings>/uploadEnabled}"
+				uploadButtonInvisible="{=!${fileUploadSettings>/uploadButtonVisible}}">
+				<m:toolbar>
+					<m:OverflowToolbar id="myId">
+						<m:Title id="attachmentTitle" />
+						<m:ToolbarSpacer />
+						
+						<m:Button
+							id="deleteSelectedButton"
+							text="Delete"
+							press="onDeleteSelectedItems"
+							enabled="false"
+							visible="false"
+							type="Transparent" />
+						<m:ToggleButton
+							id="selectAllButton"
+							text="Select all"
+							press="onSelectAllPress"
+							enabled="false"
+							visible="false"
+							type="Transparent" />
+						<m:UploadCollectionToolbarPlaceholder />
+					</m:OverflowToolbar>
+				</m:toolbar>
+				<m:items>
+				
+					<m:UploadCollectionItem
+						documentId="{documentId}"
+						fileName="{fileName}"
+						mimeType="{mimeType}"
+						thumbnailUrl="{thumbnailUrl}"
+						url="{url}"
+						enableEdit="{fileUploadSettings>/enableEdit}"
+						enableDelete="{fileUploadSettings>/enableDelete}"
+						visibleDelete="{fileUploadSettings>/visibleDelete}"
+						visibleEdit="{fileUploadSettings>/visibleEdit}"
+						attributes="{path : 'attributes', templateShareable : false}"
+						statuses="{path : 'statuses', templateShareable : false}"
+						selected="{selected}">
+						<m:attributes>
+							<m:ObjectAttribute title="{title}"
+								text="{path : 'text', formatter : '.formatAttribute'}"
+								active="{active}"
+								press="onAttributePress" />
+						</m:attributes>
+						<m:statuses>
+							<m:ObjectStatus title="{title}"
+								text="{text}"
+								state="{state}" />
+						</m:statuses>
+					</m:UploadCollectionItem>
+				</m:items>
+			</m:UploadCollection>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+
+<!-- TASKS -->
+				<ObjectPageSection id="goals3" title="Tasks">
+					<subSections>
+						<ObjectPageSubSection id="goalsSS3" title="">
+							<blocks>
+								<table:TreeTable
+                    id="TreeTableBasic"
+                    
+                    rows="{path:'/catalog/clothing', parameters: {arrayNames:['categories'], countMode: 'Inline'}}"
+                    selectionMode="Single"
+			        enableColumnReordering="false"
+			        expandFirstLevel="false">
+                <table:toolbar>
+                    <m:Toolbar>
+                        <m:Title id="title" />
+                        <m:ToolbarSpacer/>
+                        <m:Button text="Collapse all" press="onCollapseAll"/>
+                        <m:Button text="Expand first level" press="onExpandFirstLevel"/>
+                    </m:Toolbar>
+                </table:toolbar>
+                <table:columns>
+                    <table:Column width="13rem">
+                        <m:Label text="Task"/>
+                        <table:template>
+                            <m:Text text="{name}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="3rem">
+                        <m:Label text="Id"/>
+                        <table:template>
+                            <m:Text text="{Id}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="9rem">
+                        <m:Label text="Type"/>
+                        <table:template>
+                            <m:Text text="{type}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="9rem">
+                        <m:Label text="Status"/>
+                        <table:template>
+                            <m:Text text="{status}" class="openStatus" wrapping="false" visible="{= ${status} === 'Open' }" />
+                            <m:Text text="{status}" class="completedStatus" wrapping="false" visible="{= ${status} === 'Completed' }" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="9rem">
+                        <m:Label text="Responsible(s)"/>
+                        <table:template>
+                            <m:Text text="{resp}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem">
+                        <m:Label text="Notified"/>
+                        <table:template>
+                            <m:Text text="{notified}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem">
+                        <m:Label text="Due Date"/>
+                        <table:template>
+                            <m:Text text="{dueDate}" wrapping="false" />
+                        </table:template>
+                    </table:Column>
+                    <table:Column width="6rem">
+                        <m:Label text="Completed"/>
+                        <table:template>
+                        
+                            <m:Text text="{completed}" wrapping="false"  />
+                        </table:template>
+                    </table:Column>
+                </table:columns>
+            </table:TreeTable>
+							</blocks>
+						</ObjectPageSubSection>
+					</subSections>
+				</ObjectPageSection>
+			</sections>
+		</ObjectPageLayout>
+
+<m:footer>
+			<m:OverflowToolbar id="otbFooter">
+				<m:ToolbarSpacer/>
+				<m:Button type="Accept" text="Save" press="saveRequest">
+					<m:layoutData><m:OverflowToolbarLayoutData priority="NeverOverflow" /></m:layoutData>
+				</m:Button>
+				<m:Button type="Accept" text="Submit">
+					<m:layoutData><m:OverflowToolbarLayoutData priority="NeverOverflow" /></m:layoutData>
+				</m:Button>
+				<m:OverflowToolbarButton text="Delete" icon="sap-icon://delete"/>
+				<m:OverflowToolbarButton text="Edit" icon="sap-icon://edit"/>
+				<!-- <OverflowToolbarButton text="Add" icon="sap-icon://add"/>
+				<OverflowToolbarButton text="Favorite" icon="sap-icon://favorite"/>
+				<OverflowToolbarButton text="Flag" icon="sap-icon://flag"/> -->
+				<m:OverflowToolbarToggleButton text="Toggle" icon="sap-icon://action" press="onTogglePress"/>
+
+			</m:OverflowToolbar>
+		</m:footer>
+	</m:Page>
+
+</mvc:View>

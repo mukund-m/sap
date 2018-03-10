@@ -1,0 +1,64 @@
+<mvc:View height="100%"
+	controllerName="sap.ui.demo.toolpageapp.controller.Login"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:tnt="sap.tnt">
+	<tnt:ToolPage
+		id="login"
+		class="sapUiDemoToolPage">
+		<tnt:header>
+			<tnt:ToolHeader>
+				<Button
+					id="sideNavigationToggleButton1"
+					icon="sap-icon://menu2"
+					type="Transparent"
+					press="onSideNavButtonPress"
+					tooltip="{i18n>navigationToggleButtonTooltip}">
+					<layoutData>
+						<OverflowToolbarLayoutData priority="NeverOverflow"/>
+					</layoutData>
+				</Button>
+				<ToolbarSpacer/>
+				<Title text="{i18n>appTitle}"/>
+				<ToolbarSpacer/>
+				
+				<Button
+					id="userButton1"
+					text="{i18n>userName}"
+					type="Transparent"
+					press="onUserNamePress">
+					<layoutData>
+						<OverflowToolbarLayoutData closeOverflowOnInteraction="false"/>
+					</layoutData>
+				</Button>
+			</tnt:ToolHeader>
+		</tnt:header>
+		
+		<tnt:mainContents>
+			<f:SimpleForm
+									columnsL="2"
+									columnsM="2"
+									editable="true"
+									id="definition1"
+									layout="ResponsiveGridLayout">
+									
+									<f:content id="def1">
+										
+										<Label text="User Name"/>
+											<Input value="{login>/userName}" valueLiveUpdate="true" type="text" width="40%">
+											</Input>
+											
+										<Label text="Password"/>
+											<Input value="{login>/password}" valueLiveUpdate="true" type="Password" width="40%">
+											
+											</Input>
+											<Label text=" "/>
+											<Button type="Accept" width="20%" press="login" text="Login"></Button>
+		
+									</f:content>
+								</f:SimpleForm>
+				
+		</tnt:mainContents>
+	</tnt:ToolPage>
+</mvc:View>
